@@ -1,0 +1,267 @@
+@import "config";
+i {
+  color: black;
+}
+
+.name-loader {
+  width: 100px;
+}
+
+.header-container {
+  width: 100%;
+  background: var(--bgColorHeaderBoardTask);
+}
+
+.header-main {
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  height: 83px;
+  min-width: 210px;
+  padding-left: 30px;
+  border-right: 1px solid rgba(#979797, 0.4);
+  display: flex;
+  align-items: center;
+  transition: all 500ms ease;
+
+  &.widen {
+    min-width: 276px;
+  }
+
+  & img {
+    display: none;
+    &.dark {
+      display: block;
+    }
+    &.light {
+      display: block;
+    }
+  }
+
+  & .mobile-logo {
+    display: none;
+  }
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // flex: 70%;
+  width: 100%;
+  padding-right: 30px;
+  padding-left: 30px;
+
+  .header-text {
+    display: inline-block;
+    font-size: $heading-XL;
+    font-weight: 500;
+    color: var(--textHeaderColor);
+    text-transform: capitalize;
+    flex: 1;
+    white-space: nowrap;
+    width: 200px;
+    height: 40px;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    transform: translateY(8px);
+  }
+
+  & .header-text-mobile {
+    display: none;
+  }
+
+  & .header-actions {
+    display: flex;
+    align-items: center;
+    // white-space: nowrap;
+
+    & .header-add-task {
+      margin-right: 20px;
+      & button {
+        border: none;
+        background: $purple_dark;
+        padding: 12px 15px;
+        border-radius: 50px;
+        color: $white;
+        font-size: $heading-M;
+        font-weight: 500;
+        cursor: pointer;
+        margin-left: 20px;
+
+        &:hover {
+          background: $purple_light;
+        }
+
+        & .mobile-plus {
+          display: none;
+        }
+      }
+    }
+
+    & .header-extra {
+      & .board-menu-container {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--bgColorContentCheck);
+        }
+
+        & i {
+          font-size: 25px;
+          color: $purple_light;
+        }
+      }
+    }
+  }
+}
+
+// **** MENU STYLE ***
+
+::ng-deep.mat-menu-panel {
+  padding: 15px 10px;
+  width: 200px;
+  background: var(--menu);
+
+  & a {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+
+    &.edit_board {
+      color: $grey-medium;
+      margin-bottom: 30px;
+    }
+
+    &.delete_board {
+      color: $orange_dark;
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .header-main {
+    height: 83px;
+  }
+  .logo {
+    height: auto;
+    min-width: auto;
+    padding-left: 20px;
+    border-right: none;
+    justify-content: center;
+
+    &.widen {
+      min-width: auto;
+    }
+
+    & img {
+      display: none;
+      &.dark {
+        display: none;
+      }
+      &.light {
+        display: none;
+      }
+    }
+
+    & .mobile-logo {
+      display: inline-block;
+    }
+  }
+
+  .header-content {
+    padding-right: 20px;
+    padding-left: 20px;
+    overflow: hidden;
+
+    & .header-text {
+      display: none;
+    }
+
+    & .header-text-mobile {
+      display: flex;
+      align-items: center;
+      font-size: $heading-XL;
+      font-weight: 500;
+      color: var(--textHeaderColor);
+      text-transform: capitalize;
+      cursor: pointer;
+      overflow: hidden;
+      width: 80%;
+      height: 40px;
+      transform: translateY(8px);
+
+      &-main {
+        display: inline-block;
+        max-width: 80%;
+        overflow-x: hidden;
+        height: 100%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      & i {
+        display: inline-block;
+        color: var(--textHeaderColor);
+        margin-left: 10px;
+        font-size: 15px;
+        transition: all 300ms;
+        margin-bottom: 10px;
+        &.roll {
+          transform: rotate(180deg);
+          color: red;
+        }
+      }
+    }
+
+    & .header-actions {
+      & .header-add-task {
+        margin-right: 20px;
+        & button {
+          padding: 7px 20px;
+          border-radius: 20px;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &:hover {
+            background: $purple_dark;
+          }
+
+          & .desktop-plus {
+            display: none;
+          }
+          & .mobile-plus {
+            display: inline-block;
+
+            & i {
+              color: $white;
+              font-size: 20px;
+              font-weight: bolder;
+            }
+          }
+        }
+      }
+
+      & .header-extra {
+        & i {
+          font-size: 25px;
+          color: $purple_light;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

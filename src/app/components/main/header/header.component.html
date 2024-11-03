@@ -1,0 +1,124 @@
+<div class="header-container">
+  <div class="header-main">
+    <div class="logo" [ngClass]="{ widen: isDrawerOpened }">
+      <img
+        src="../../../assets/logo-light.png"
+        alt=""
+        [ngClass]="{ light: themeState == 'dark' }"
+      />
+      <img
+        src="../../../assets/logo-dark.png"
+        alt=""
+        [ngClass]="{ dark: themeState == 'light' }"
+      />
+      <img src="../../../assets/logo-icon.png" class="mobile-logo" alt="" />
+    </div>
+
+    <div class="header-content">
+      <div class="header-text">
+        <div class="name-loader" *ngIf="isFetching">
+          <div class="for-dark" *ngIf="themeState == 'dark'">
+            <ngx-skeleton-loader
+              count="1"
+              [theme]="{
+                height: '20px',
+                'background-color': '#20212c'
+              }"
+            ></ngx-skeleton-loader>
+          </div>
+          <div class="for-light" *ngIf="themeState == 'light'">
+            <ngx-skeleton-loader
+              count="1"
+              [theme]="{
+                height: '20px',
+                'background-color': '#e4ebfa'
+              }"
+            ></ngx-skeleton-loader>
+          </div>
+        </div>
+        <span *ngIf="!isFetching">
+          {{ boardName }}
+        </span>
+      </div>
+      <div class="header-text-mobile" (click)="onOpenMobileMenu()">
+        <div class="header-text-mobile-main">
+          <div class="name-loader" *ngIf="isFetching">
+            <div class="for-dark" *ngIf="themeState == 'dark'">
+              <ngx-skeleton-loader
+                count="1"
+                [theme]="{
+                  height: '20px',
+                  'background-color': '#20212c'
+                }"
+              ></ngx-skeleton-loader>
+            </div>
+            <div class="for-light" *ngIf="themeState == 'light'">
+              <ngx-skeleton-loader
+                count="1"
+                [theme]="{
+                  height: '20px',
+                  'background-color': '#e4ebfa'
+                }"
+              ></ngx-skeleton-loader>
+            </div>
+          </div>
+          <span *ngIf="!isFetching">
+            {{ mobileBoardName }}
+          </span>
+        </div>
+        <i
+          class="fa fa-angle-down"
+          [ngStyle]="{ transform: isAngleUp ? 'rotate(180deg)' : 'rotate(0)' }"
+        ></i>
+      </div>
+
+      <div class="header-actions">
+        <div class="header-add-task" *ngIf="board.columns.length > 0">
+          <button
+            (click)="
+              onEditBoard_Task(
+                boardName == 'Add board' ? 'add_board' : 'add_task'
+              )
+            "
+          >
+            <span class="desktop-plus">+ Add New Task</span>
+            <span class="mobile-plus"><i class="fab fa-plus"></i></span>
+          </button>
+        </div>
+
+        <div class="header-extra">
+          <div
+            class="board-menu-container"
+            *ngIf="board.columns.length > 0"
+            [matMenuTriggerFor]="board_menu"
+          >
+            <i class="fa fa-ellipsis-vertical"></i>
+          </div>
+
+          <div class="board-menu">
+            <mat-menu #board_menu="matMenu">
+              <a
+                class="edit_board"
+                (click)="
+                  onEditBoard_Task(
+                    boardName == 'Add board' ? 'add_board' : 'edit_board'
+                  )
+                "
+                >Edit Board</a
+              >
+              <a
+                class="delete_board"
+                (click)="
+                  onEditBoard_Task(
+                    boardName == 'Add board' ? 'add_board' : 'delete_board'
+                  )
+                "
+                >Delete Board</a
+              >
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
+
+$purple_dark: #635fc7;
+$purple_light: #a8a4ff;
+$purple_X_light: #e4ebfa;
+$black: black;
+$dark_very: #000112;
+$dark_slight: #20212c;
+$grey_very: #2b2c37;
+$grey_slight: #3e3f4e;
+$grey-medium: #828fa3;
+$disabled: rgba($grey_slight, 0.5);
+$light: #f4f7fd;
+$white: #ffffff;
+$orange_dark: #ea5555;
+$orange_light: #ff9898;
+$stroke: #979797;
+$sideBar_light: white;
+$sideBar_dark: blue;
+$green_ball: #49c4e5;
+
+$font-family: "Plus Jakarta Sans", sans-serif;
+$heading-XL: 24px;
+$heading-L: 18px;
+$heading-M: 15px;
+$heading-S: 12px;
+$body-L: 13px;
+$body-M: 12px;
+
+@mixin button($background, $color, $font) {
+  border: none;
+  background: $background;
+  padding: 14px 0px;
+  border-radius: 50px;
+  color: $color;
+  font-size: $font;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@mixin lighten() {
+  --bgColorHeaderBoardTask: #{$white};
+  --bgColorContentCheck: #{$light};
+  --textHeaderColor: #{$black};
+  --column: #{$purple_X_light};
+  --taskText: #{$black};
+  --sideBar: #{$dark_very};
+  --menu: #{$white};
+  --dialogBg: #{$white};
+  --subHeadingLabel: #{$grey-medium};
+  --textInput: #{rgba(black, 0.5)};
+  --secBtn: #{rgba($purple_dark, 0.3)};
+}
+
+@mixin darken() {
+  --bgColorHeaderBoardTask: #{$grey_very};
+  --bgColorContentCheck: #{$dark_slight};
+  --textHeaderColor: #{$white};
+  --column: #{$grey_very};
+  --taskText: #{$white};
+  --sideBar: #{$sideBar_light};
+  --menu: #{$dark_slight};
+  --dialogBg: #{$grey_very};
+  --subHeadingLabel: #{$white};
+  --textInput: #{rgba(white, 0.5)};
+  --secBtn: #{$white};
+}

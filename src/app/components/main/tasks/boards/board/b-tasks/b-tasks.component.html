@@ -1,0 +1,76 @@
+<div class="tasks-container" cdkDropListGroup>
+  <div class="loading-tasks" *ngIf="isFetching">
+    <div class="loading-task">
+      <ngx-skeleton-loader
+        count="1"
+        [theme]="{
+          height: '100vh',
+          'background-color': theme == 'dark' ? '#2b2c37' : '#e4ebfa'
+        }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="loading-task">
+      <ngx-skeleton-loader
+        count="1"
+        [theme]="{
+          height: '100vh',
+          'background-color': theme == 'dark' ? '#2b2c37' : '#e4ebfa'
+        }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="loading-task">
+      <ngx-skeleton-loader
+        count="1"
+        [theme]="{
+          height: '100vh',
+          'background-color': theme == 'dark' ? '#2b2c37' : '#e4ebfa'
+        }"
+      ></ngx-skeleton-loader>
+    </div>
+  </div>
+  <div
+    class="tasks-main"
+    *ngIf="boards.length > 0 && !isFetching"
+    cdkDropListGroup
+  >
+    <div
+      class="tasks-main-group"
+      *ngFor="let column of activeBoard.columns; let i = index"
+    >
+      <div class="tasks-group">
+        <div class="tasks-group-heading">
+          <span class="icon" [ngClass]="{ purple: (i + 1) % 2 == 0 }"></span
+          >{{ column.toUpperCase() }}
+          <span class="tasks-count"
+            >({{ activeBoard.tasks[column].length }})</span
+          >
+        </div>
+
+        <div class="tasks">
+          <app-b-task
+            [tasks]="tasks[column]"
+            [allTasks]="tasks"
+            [columnName]="activeBoard.columns"
+            [singleColumnName]="column"
+          ></app-b-task>
+        </div>
+      </div>
+    </div>
+
+    <div class="new-column" (click)="onAddBoard_Column('column')">
+      + New Column
+    </div>
+  </div>
+
+  <div
+    class="empty-tasks empty board"
+    *ngIf="boards.length == 0 && !isFetching"
+  >
+    <div class="empty-tasks-heading">
+      No boards created yet. Create a new board to get started.
+    </div>
+    <div class="empty-tasks-button">
+      <button (click)="onAddBoard_Column('board')">+Add New Board</button>
+    </div>
+  </div>
+</div>

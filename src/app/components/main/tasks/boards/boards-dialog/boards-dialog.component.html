@@ -1,0 +1,106 @@
+<div class="boards-dialog-container">
+  <div class="form-error-alert" [ngClass]="{ showError: showError }">
+    Fields cannot be empty
+  </div>
+  <!-- ** ADD BOARD ** -->
+  <mat-dialog-content class="add-board" *ngIf="type == 'create'">
+    <div class="add-board-heading">
+      {{ editState ? "Edit Board" : "Add New Board" }}
+    </div>
+    <form
+      class="add-board-form-main"
+      [formGroup]="createBoardForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="form-group">
+        <label for="title">{{ editState ? "Board Name" : "Name" }}</label>
+        <div class="input-container">
+          <input
+            formControlName="name"
+            name="title"
+            id="title"
+            type="text"
+            placeholder="e.g. Web Design"
+            [ngClass]="{ error: name.invalid && name.touched }"
+          />
+          <span class="error-msg" *ngIf="name.invalid && name.touched">
+            Can't be empty</span
+          >
+        </div>
+      </div>
+
+      <div class="form-group columns-group" formArrayName="columns">
+        <label for="column0" *ngIf="columns.controls.length > 0">{{
+          editState ? "Board Columns" : "Columns"
+        }}</label>
+        <div
+          class="columns"
+          *ngFor="let columnControl of columns.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <div
+            class="column"
+            [ngClass]="{ margin: columns.controls.length > 0 }"
+          >
+            <div class="input-container">
+              <input
+                formControlName="column"
+                class="column_input"
+                type="text"
+                [id]="'column' + i"
+                [ngClass]="{
+                  error: columnControl.invalid && columnControl.touched,
+                  disabled: columnControl.disabled
+                }"
+              />
+              <span
+                class="error-msg"
+                *ngIf="columnControl.invalid && columnControl.touched"
+              >
+                Can't be empty</span
+              >
+            </div>
+            <i
+              class="fa-solid fa-xmark"
+              (click)="removeColumn(i, columnControl.value)"
+            ></i>
+          </div>
+        </div>
+        <button type="button" (click)="addColumn()">+Add New Column</button>
+      </div>
+
+      <button
+        type="submit"
+        class="submit-btn"
+        [ngClass]="{ disabled: createBoardForm.invalid }"
+        [disabled]="isSubmitting"
+      >
+        <span class="btn-texts" *ngIf="!isSubmitting">
+          {{ editState ? "Save Changes" : "Create New Board" }}
+        </span>
+
+        <span class="loader" *ngIf="isSubmitting"></span>
+      </button>
+    </form>
+  </mat-dialog-content>
+
+  <!-- **DELETE BOARD ** -->
+  <mat-dialog-content class="delete-board" *ngIf="type == 'delete'">
+    <div class="delete-board-heading">Delete this board?</div>
+
+    <div class="delete-board-copy">
+      Are you sure you want to delete the
+      {{ board.name.toUpperCase() }} board? This action will remove all columns
+      and tasks and cannot be reversed.
+    </div>
+
+    <div class="delete-board-actions">
+      <button id="delete" (click)="onDeleteBoard()">
+        <span class="btn-texts" *ngIf="!isSubmitting"> Delete </span>
+
+        <span class="loader" *ngIf="isSubmitting"></span>
+      </button>
+      <button id="cancel" (click)="onCloseDialog()">Cancel</button>
+    </div>
+  </mat-dialog-content>
+</div>

@@ -1,0 +1,104 @@
+<div class="sign-in-container">
+  <div class="sign-in-main">
+    <div class="sign-in-main-content">
+      <div class="sign-in-logo">
+        <img
+          src="../../../assets/logo-light.png"
+          alt=""
+          [ngClass]="{ light: themeState == 'dark' }"
+        />
+        <img
+          src="../../../assets/logo-dark.png"
+          alt=""
+          [ngClass]="{ dark: themeState == 'light' }"
+        />
+      </div>
+      <p class="sign-in-heading">Sign In</p>
+
+      <form
+        class="sign-in-form"
+        [formGroup]="signInForm"
+        (ngSubmit)="onSignIn()"
+      >
+        <div class="form-group">
+          <input
+            id="email"
+            type="email"
+            placeholder="Email"
+            [formControlName]="'email'"
+            autocomplete="on"
+            [ngClass]="{
+              'input-error': email.touched && email.invalid
+            }"
+          />
+          <div
+            class="input-icon"
+            [ngClass]="{ 'input-error': email.touched && email.invalid }"
+          >
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+        </div>
+        <p class="error name-error" *ngIf="email.touched && email.invalid">
+          Email cannot be empty
+        </p>
+
+        <div class="form-group">
+          <input
+            id="password"
+            [type]="show ? 'text' : 'password'"
+            placeholder="Password"
+            [formControlName]="'password'"
+            [ngClass]="{
+              'input-error': password.touched && password.invalid
+            }"
+          />
+          <div
+            class="input-icon"
+            [ngClass]="{
+              'input-error': password.touched && password.invalid
+            }"
+          >
+            <i class="fa-solid fa-key"></i>
+          </div>
+          <div class="eye" (click)="onToggleVisibility()">
+            <i class="fas fa-eye-slash" *ngIf="!show"></i>
+            <i class="fas fa-eye" *ngIf="show"></i>
+          </div>
+        </div>
+        <p
+          class="error name-error"
+          *ngIf="password.touched && password.invalid"
+        >
+          Password cannot be empty
+        </p>
+        <button
+          class="sign-in-btn"
+          type="submit"
+          [disabled]="isAuthLoading"
+          [ngClass]="{ invalid: signInForm.invalid }"
+        >
+          <span class="login-btn-text" *ngIf="!isAuthLoading"> Sign In </span
+          ><span class="login-btn-loader" *ngIf="isAuthLoading"></span>
+        </button>
+      </form>
+
+      <div class="forgot">
+        <a (click)="onResetPassword()">Forgot password?</a>
+      </div>
+
+      <p class="or">OR</p>
+
+      <div class="sign-in-google" (click)="onSignInWithGoogle()">
+        <button>
+          <i class="fab fa-google"></i>
+          <span>Continue with Google </span>
+        </button>
+      </div>
+
+      <div class="have-account">
+        Don't have an account?
+        <a [routerLink]="['/', 'auth', 'sign-up']"> Sign up</a>
+      </div>
+    </div>
+  </div>
+</div>

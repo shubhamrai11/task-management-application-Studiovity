@@ -1,0 +1,121 @@
+@import "config";
+
+.loading-tasks {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+
+  & .loading-task {
+    width: 280px;
+
+    &:not(:last-child) {
+      margin-right: 25px;
+    }
+  }
+}
+
+.tasks-container {
+  background: var(--bgColorContentCheck);
+  padding-left: 30px;
+  padding-right: 50px;
+}
+
+.tasks-main {
+  display: flex;
+  align-items: flex-start;
+  background: var(--bgColorContentCheck);
+  padding-bottom: 40px;
+}
+
+.tasks-main-group {
+  display: flex;
+  align-items: flex-start;
+}
+
+.tasks-group {
+  width: 280px;
+  margin-right: 25px;
+
+  &-heading {
+    font-size: $heading-M;
+    font-weight: 500;
+    color: $grey-medium;
+    letter-spacing: 2.4px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    & .icon {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      display: inline-block;
+      background-color: $green_ball;
+      margin-right: 12px;
+
+      &.purple {
+        background-color: $purple_dark;
+      }
+    }
+
+    & .tasks-count {
+      margin-left: 5px;
+    }
+  }
+}
+
+.tasks {
+  height: 200px;
+}
+
+.new-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $heading-XL;
+  color: $grey-medium;
+  font-weight: 600;
+  width: 280px !important;
+  height: 100vh;
+  background: var(--column);
+  cursor: pointer;
+  margin-top: 40px;
+
+  &:hover {
+    color: $purple_dark;
+  }
+}
+
+// ** EMPTY TASKS **
+
+.empty-tasks {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+
+  &-heading {
+    font-size: $heading-L;
+    color: $grey-medium;
+    font-weight: 500;
+    margin-bottom: 25px;
+  }
+
+  &-button {
+    & button {
+      border: none;
+      background: $purple_dark;
+      padding: 12px 15px;
+      border-radius: 50px;
+      color: $white;
+      font-size: $heading-M;
+      font-weight: 500;
+      cursor: pointer;
+
+      &:hover {
+        background: $purple_light;
+      }
+    }
+  }
+}
